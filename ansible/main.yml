@@ -1,0 +1,38 @@
+---
+- name: "Install and configure my_web app"
+  hosts: web
+  become: true
+  roles:
+   - my_web
+   - prometheus.prometheus.node_exporter
+
+- name: "Set up load balancer"
+  hosts: lb
+  become: true
+  roles:
+   - my-lb
+   - prometheus.prometheus.node_exporter
+
+- name: Setup prometheus
+  hosts: monitoring
+  become: true
+  roles:
+    - my_monitoring
+    - prometheus.prometheus.node_exporter
+    - prometheus.prometheus.prometheus
+  vars:
+    prometheus_targets:
+      node:
+        - targets:
+            - "{{ hostvars['www-0']['ansible_host'] }}:9100"
+          labels:
+            env: web
+        - targets:
+            - "{{ hostvars['monitoring-0']['ansible_host'] }}:9100"
+          labels:
+            env: monitoring
+        - targets:
+            - "{{ hostvars['load-balancer-0']['ansible_host'] }}:9100"
+            - "{{ hostvars['load-balancer-0']['ansible_host'] }}:9113"
+          labels:
+            env: loadbalancer
