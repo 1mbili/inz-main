@@ -1,6 +1,3 @@
-variable "do_token" {}
-variable "pvt_key" {}
-
 terraform {
   required_providers {
     digitalocean = {
@@ -9,7 +6,11 @@ terraform {
     }
    azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=3.0.0"
+      version = "=3.79.0"
+    }
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+      version = "~> 4"
     }
   }
   backend "azurerm" {
@@ -20,11 +21,9 @@ terraform {
 }
 
 provider "digitalocean" {
-  token = var.do_token
+  token = data.azurerm_key_vault_secret.digitalocean_token.value
 }
 
 data "digitalocean_ssh_key" "terraform" {
   name = "terraform"
 }
-
-

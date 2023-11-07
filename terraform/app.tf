@@ -8,12 +8,11 @@ resource "digitalocean_droplet" "web" {
     data.digitalocean_ssh_key.terraform.id
   ]
 
-
 connection {
   host = self.ipv4_address
   user = "root"
   type = "ssh"
-  private_key = file(var.pvt_key)
+  private_key = data.azurerm_key_vault_secret.private-ssh-key.value
   timeout = "2m"
 }
   
@@ -25,7 +24,6 @@ connection {
     ]
   }
 }
-
 
 resource "digitalocean_droplet" "load_balancer" {
   count = 1
@@ -41,7 +39,7 @@ connection {
   host = self.ipv4_address
   user = "root"
   type = "ssh"
-  private_key = file(var.pvt_key)
+  private_key = data.azurerm_key_vault_secret.private-ssh-key.value
   timeout = "2m"
 }
   
@@ -69,7 +67,7 @@ connection {
   host = self.ipv4_address
   user = "root"
   type = "ssh"
-  private_key = file(var.pvt_key)
+  private_key = data.azurerm_key_vault_secret.private-ssh-key.value
   timeout = "2m"
 }
   
@@ -82,20 +80,19 @@ connection {
   }
 }
 
-
 resource "local_file" "ansible_inventory" {
-  content = templatefile("anisble_inventory.tpl",
+  content = templatefile("templates/anisble_inventory.tpl",
     {
      monitoring-vms = digitalocean_droplet.monitoring
      web-vms = digitalocean_droplet.web
      lb-vms = digitalocean_droplet.load_balancer
     }
   )
-  filename = "../ansible/inventory.ini"
+  filename = "../templates/ansible/inventory.ini"
 }
 
 resource "local_file" "ansible_main" {
-  content = templatefile("main.yml.tpl",
+  content = templatefile("templates/main.yml.tpl",
     {
      monitoring-vms = digitalocean_droplet.monitoring
      web-vms = digitalocean_droplet.web
