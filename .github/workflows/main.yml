@@ -16,9 +16,9 @@ jobs:
         working-directory: ./terraform
     steps:
       - name: Test using secret
-        env:
-          dummy: ${{ secrets.ARM_CLIENT_ID }}
         run: echo "$dummy"
+        env:
+          dummy: ${{ vars.DUPA }}
 
       - name: Check out the codebase.
         uses: actions/checkout@v4
