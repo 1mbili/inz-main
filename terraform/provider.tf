@@ -13,10 +13,10 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "~> 4"
     }
-    local = {
-      source  = "hashicorp/local"
-      version = "~> 2.1"
-    }
+    # local = {
+    #   source  = "hashicorp/local"
+    #   version = "~> 2.1"
+    # }
   }
   backend "azurerm" {
     storage_account_name = "csb10032002f1976f3a"
