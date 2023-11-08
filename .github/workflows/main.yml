@@ -70,7 +70,7 @@ jobs:
            python-version: '3.11'
       
       - name: Install Ansible.
-        run: pip3 install ansible ansible-galaxy
+        run: pip3 install ansible
 
       - name: Install required roles.
         run: ansible-galaxy install -r ../ansible/requirements.yml
