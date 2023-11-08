@@ -30,11 +30,6 @@ data "azurerm_key_vault_secret" "cloudflare_zone_id" {
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
-data "azurerm_key_vault_secret" "cloudflare_account_id" {
-  name         = "cloudflare-account-id"
-  key_vault_id = data.azurerm_key_vault.existing.id
-}
-
 data "azurerm_key_vault_secret" "digitalocean_token" {
   name         = "digitalocean-token"
   key_vault_id = data.azurerm_key_vault.existing.id

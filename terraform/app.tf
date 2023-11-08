@@ -1,21 +1,21 @@
 resource "digitalocean_droplet" "web" {
-  count = 1
-  image = "ubuntu-22-04-x64"
-  name = "www-${count.index}"
+  count  = 1
+  image  = "ubuntu-22-04-x64"
+  name   = "www-${count.index}"
   region = "nyc3"
-  size = "s-2vcpu-2gb"
+  size   = "s-2vcpu-2gb"
   ssh_keys = [
     data.digitalocean_ssh_key.terraform.id
   ]
 
-connection {
-  host = self.ipv4_address
-  user = "root"
-  type = "ssh"
-  private_key = data.azurerm_key_vault_secret.private-ssh-key.value
-  timeout = "2m"
-}
-  
+  connection {
+    host        = self.ipv4_address
+    user        = "root"
+    type        = "ssh"
+    private_key = data.azurerm_key_vault_secret.private-ssh-key.value
+    timeout     = "2m"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
@@ -26,23 +26,23 @@ connection {
 }
 
 resource "digitalocean_droplet" "load_balancer" {
-  count = 1
-  image = "ubuntu-22-04-x64"
-  name = "load-balancer-${count.index}"
+  count  = 1
+  image  = "ubuntu-22-04-x64"
+  name   = "load-balancer-${count.index}"
   region = "nyc3"
-  size = "s-1vcpu-1gb"
+  size   = "s-1vcpu-1gb"
   ssh_keys = [
     data.digitalocean_ssh_key.terraform.id
   ]
 
-connection {
-  host = self.ipv4_address
-  user = "root"
-  type = "ssh"
-  private_key = data.azurerm_key_vault_secret.private-ssh-key.value
-  timeout = "2m"
-}
-  
+  connection {
+    host        = self.ipv4_address
+    user        = "root"
+    type        = "ssh"
+    private_key = data.azurerm_key_vault_secret.private-ssh-key.value
+    timeout     = "2m"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
@@ -53,24 +53,24 @@ connection {
 }
 
 resource "digitalocean_droplet" "monitoring" {
-  count = 1
-  image = "ubuntu-22-04-x64"
-  name = "monitoring-${count.index}"
+  count  = 1
+  image  = "ubuntu-22-04-x64"
+  name   = "monitoring-${count.index}"
   region = "nyc3"
-  size = "s-2vcpu-2gb"
+  size   = "s-2vcpu-2gb"
   ssh_keys = [
     data.digitalocean_ssh_key.terraform.id
   ]
 
 
-connection {
-  host = self.ipv4_address
-  user = "root"
-  type = "ssh"
-  private_key = data.azurerm_key_vault_secret.private-ssh-key.value
-  timeout = "2m"
-}
-  
+  connection {
+    host        = self.ipv4_address
+    user        = "root"
+    type        = "ssh"
+    private_key = data.azurerm_key_vault_secret.private-ssh-key.value
+    timeout     = "2m"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
@@ -83,20 +83,20 @@ connection {
 resource "local_file" "ansible_inventory" {
   content = templatefile("templates/anisble_inventory.tpl",
     {
-     monitoring-vms = digitalocean_droplet.monitoring
-     web-vms = digitalocean_droplet.web
-     lb-vms = digitalocean_droplet.load_balancer
+      monitoring-vms = digitalocean_droplet.monitoring
+      web-vms        = digitalocean_droplet.web
+      lb-vms         = digitalocean_droplet.load_balancer
     }
   )
-  filename = "../templates/ansible/inventory.ini"
+  filename = "../ansible/inventory.ini"
 }
 
 resource "local_file" "ansible_main" {
   content = templatefile("templates/main.yml.tpl",
     {
-     monitoring-vms = digitalocean_droplet.monitoring
-     web-vms = digitalocean_droplet.web
-     lb-vms = digitalocean_droplet.load_balancer
+      monitoring-vms = digitalocean_droplet.monitoring
+      web-vms        = digitalocean_droplet.web
+      lb-vms         = digitalocean_droplet.load_balancer
     }
   )
   filename = "../ansible/main.yml"
