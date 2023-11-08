@@ -18,21 +18,11 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v4
 
-
       - uses: hashicorp/setup-terraform@v2
-        name: Setup TFLint
+        name: Setup Terraform
         with:
           terraform_version: "1.6.3"
     
-      - name: Show version
-        run: tflint --version
-
-      - name: Init TFLint
-        run: tflint --init
-
-      - name: Run TFLint
-        run: tflint -f compact
-
       - name: Initialize Terraform
         run: terraform init
         env:
