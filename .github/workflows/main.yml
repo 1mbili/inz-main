@@ -5,7 +5,6 @@ name: CI
     branches:
       - main
 
-
 jobs:
   Deploy-Infrastructure:
     name: Terraform
