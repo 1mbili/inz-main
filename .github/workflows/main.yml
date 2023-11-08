@@ -7,8 +7,8 @@ name: CI
 
 
 jobs:
-  lint:
-    name: Lint
+  Deploy-Infrastructure:
+    name: Terraform
     runs-on: ubuntu-latest
     environment: PROD
     defaults:
@@ -17,15 +17,12 @@ jobs:
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v4
-      - name: Test using secret
-        run: echo "$dummy"
-        env:
-          dummy: ${{ vars.ARM_CLIENT_ID }}
 
-      - uses: terraform-linters/setup-tflint@v3
+
+      - uses: hashicorp/setup-terraform@v2
         name: Setup TFLint
         with:
-            tflint_version: v0.44.1
+          terraform_version: "1.6.3"
     
       - name: Show version
         run: tflint --version
