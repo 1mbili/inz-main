@@ -70,7 +70,13 @@ jobs:
            python-version: '3.11'
       
       - name: Install Ansible.
-        run: pip3 install ansible
+        run: pip3 install ansible ansible-galaxy
+
+      - name: Install required roles.
+        run: ansible-galaxy install -r ../ansible/requirements.yml
+
+      - name: Install azure collection dependencies
+        run: pip3 install -r https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
 
       - name: Run Ansible Playbook
         run: ansible-playbook -i ../ansible/inventory.ini ../ansible/main.yml

@@ -1,0 +1,8 @@
+- name: my_web
+  src: https://github.com/1mbili/inz-web-app.git
+
+- name: my-lb
+  src: https://github.com/1mbili/inz-web-lb.git
+
+- name: my_monitoring
+  src: https://github.com/1mbili/my_monitoring.git
