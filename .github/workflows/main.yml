@@ -72,6 +72,11 @@ jobs:
       - name: Install Ansible.
         run: pip3 install ansible
 
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Install required roles.
         run: ansible-galaxy install -r ../ansible/requirements.yml
 
