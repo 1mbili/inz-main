@@ -20,7 +20,7 @@ jobs:
       - name: Test using secret
         run: echo "$dummy"
         env:
-          dummy: ${{ secrets.ARM_CLIENT_ID }}
+          dummy: ${{ vars.ARM_CLIENT_ID }}
 
       - uses: terraform-linters/setup-tflint@v3
         name: Setup TFLint
@@ -43,6 +43,7 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
 
       - name: Run terraform apply
         run: terraform apply -auto-approve
@@ -51,3 +52,4 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
