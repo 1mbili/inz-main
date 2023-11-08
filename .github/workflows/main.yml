@@ -20,7 +20,7 @@ jobs:
       - name: Test using secret
         run: echo "$dummy"
         env:
-          dummy: ${{ vars.DUPA }}
+          dummy: ${{ secrets.ARM_CLIENT_ID }}
 
       - uses: terraform-linters/setup-tflint@v3
         name: Setup TFLint
