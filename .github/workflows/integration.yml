@@ -1,0 +1,20 @@
+---
+name: Integration
+'on':
+	pull request:
+		branches:
+			- master
+
+jobs:
+	Deploy-Infrastructure:
+			name: CI pipeline
+			runs-on: ubuntu-latest
+			environment: PROD
+			defaults:
+					run:
+							working-directory: ./terraform
+			steps:
+			- name: Check out the codebase.
+					uses: actions/checkout@v4
+              
+    

@@ -7,7 +7,7 @@ name: CI
 
 jobs:
   Deploy-Infrastructure:
-    name: Terraform
+    name: Deploy
     runs-on: ubuntu-latest
     environment: PROD
     defaults:
