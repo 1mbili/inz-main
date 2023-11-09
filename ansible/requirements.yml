@@ -3,6 +3,7 @@ roles:
   - name: my_web
     src: git@github.com:1mbili/inz-web-app.git
     scm: git
+    version: "f0ae361"
 
   - name: my-lb
     src: git@github.com:1mbili/inz-web-lb.git
