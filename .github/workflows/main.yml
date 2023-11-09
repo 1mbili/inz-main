@@ -85,3 +85,8 @@ jobs:
 
       - name: Run Ansible Playbook
         run: ansible-playbook -i ../ansible/inventory.ini ../ansible/main.yml
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          KEY_VAULT_NAME: ${{ secrets.KEY_VAULT_NAME }}
