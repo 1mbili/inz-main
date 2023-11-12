@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  Deploy-Infrastructure:
-    name: CI pipeline
+  Lint_Terraform:
+    name: Lint Terraform
     runs-on: ubuntu-latest
     environment: PROD
     defaults:
@@ -28,3 +28,27 @@ jobs:
       - name: Run TFLint
         run: tflint
 
+  Plan_Terraform:
+    name: Plan Terraform
+    runs-on: ubuntu-latest
+    environment: PROD
+    defaults:
+      run:
+        working-directory: ./terraform
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v2
+        name: Setup terraform
+      
+      - name: Terraform Init
+        run: terraform init
+      
+      - name: Terraform Validate
+        run: terraform validate
+      
+      - name: Terraform Plan
+        run: terraform plan
+        continue-on-error: true
+      
