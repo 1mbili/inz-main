@@ -7,7 +7,6 @@ data "azurerm_key_vault" "existing" {
   resource_group_name = "Inzynierka-app"
 }
 
-# Create a secret in the existing Azure Key Vault
 resource "azurerm_key_vault_secret" "mysql-host" {
   name         = "mysql-host"
   value        = digitalocean_database_cluster.mysqql-example.host
