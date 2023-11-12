@@ -37,3 +37,5 @@ ansible/inventory.ini
 **inventory.ini
 **/inventory.ini
 *inventory.ini
+*infracost*
+*.terraform

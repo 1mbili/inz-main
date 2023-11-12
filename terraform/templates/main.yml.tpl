@@ -1,4 +1,11 @@
 ---
+- name: "Set up Content delivery network"
+  hosts: cdn
+  become: true
+  roles:
+    - my_cdn
+    - prometheus.prometheus.node_exporter
+
 - name: "Install and configure my_web app"
   hosts: web
   become: true

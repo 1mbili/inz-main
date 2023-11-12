@@ -3,6 +3,7 @@ resource "digitalocean_database_cluster" "mysqql-example" {
   engine     = "mysql"
   version    = "8"
   size       = "db-s-1vcpu-1gb"
-  region     = "nyc1"
+  region     = "nyc3"
   node_count = 1
+  private_network_uuid  = digitalocean_vpc.siec_aplikacji.id
 }
