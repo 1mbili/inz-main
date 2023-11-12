@@ -21,10 +21,10 @@ jobs:
         name: Setup TFLint
         with:
           tflint_version: v0.44.1
-      
+
       - name: Init TFLint
         run: tflint --init
-    
+
       - name: Run TFLint
         run: tflint
 
@@ -41,7 +41,7 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v2
         name: Setup terraform
-      
+
       - name: Terraform Init
         run: terraform init
         env:
@@ -51,7 +51,6 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
 
-      
       - name: Terraform Validate
         run: terraform validate
       
