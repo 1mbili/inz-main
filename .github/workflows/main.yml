@@ -40,30 +40,6 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
 
-
-      - uses: hashicorp/setup-terraform@v2
-        name: Setup Terraform
-        with:
-          terraform_version: "1.6.3"
-    
-      - name: Initialize Terraform
-        run: terraform init
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
-
-      - name: Run terraform apply
-        run: terraform apply -auto-approve
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
-
       - name: Set up Python 3.
         uses: actions/setup-python@v2
         with:
