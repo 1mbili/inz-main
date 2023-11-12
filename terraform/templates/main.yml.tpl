@@ -32,19 +32,19 @@
       node:
         - targets:
             %{ for ip in web-vms ~}
-- "{{ hostvars['${ip.name}']['ansible_host'] }}:9100"
+- "{{ hostvars['${ip.name}']['private_adress'] }}:9100"
 %{ endfor ~}
           labels:
             env: web
         - targets:
             %{ for ip in monitoring-vms ~}
-- "{{ hostvars['${ip.name}']['ansible_host'] }}:9100"
+- "{{ hostvars['${ip.name}']['private_adress'] }}:9100"
 %{ endfor ~}
           labels:
             env: monitoring
         - targets:
             %{ for ip in lb-vms ~}
-- "{{ hostvars['${ip.name}']['ansible_host'] }}:9100"
+- "{{ hostvars['${ip.name}']['private_adress'] }}:9100"
             - "{{ hostvars['${ip.name}']['ansible_host'] }}:9113"
 %{ endfor ~}          
           labels:
