@@ -44,6 +44,13 @@ jobs:
       
       - name: Terraform Init
         run: terraform init
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
+
       
       - name: Terraform Validate
         run: terraform validate
@@ -51,4 +58,11 @@ jobs:
       - name: Terraform Plan
         run: terraform plan
         continue-on-error: true
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
+
       
