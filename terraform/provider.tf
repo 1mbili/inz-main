@@ -7,7 +7,7 @@ terraform {
     }
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=3.79.0"
+      version = "=3.61.0"
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
@@ -25,10 +25,10 @@ terraform {
   }
 }
 
-provider "digitalocean" {
-  token = data.azurerm_key_vault_secret.digitalocean_token.value
-}
-
-data "digitalocean_ssh_key" "terraform" {
-  name = "terraform"
+provider "azurerm" {
+  features {
+    resource_group {
+       prevent_deletion_if_contains_resources = false
+     }
+  }
 }

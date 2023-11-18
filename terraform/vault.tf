@@ -1,21 +1,20 @@
-provider "azurerm" {
-  features {}
-}
-
 data "azurerm_key_vault" "existing" {
   name                = "vault0a"
   resource_group_name = "Inzynierka-app"
 }
 
-resource "azurerm_key_vault_secret" "mysql-host" {
-  name         = "mysql-host"
-  value        = digitalocean_database_cluster.mysqql-example.host
+data "azurerm_key_vault_secret" "mysql-host" {
+  name         = "azure-db-host"
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
-resource "azurerm_key_vault_secret" "mysql-password" {
+data "azurerm_key_vault_secret" "mysql-password" {
   name         = "mysql-password"
-  value        = digitalocean_database_cluster.mysqql-example.password
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
+data "azurerm_key_vault_secret" "mysql-user" {
+  name         = "mysql-user"
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
