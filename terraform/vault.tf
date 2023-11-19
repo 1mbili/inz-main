@@ -3,7 +3,7 @@ data "azurerm_key_vault" "existing" {
   resource_group_name = "Inzynierka-app"
 }
 
-data "azurerm_key_vault_secret" "mysql-host" {
+data "azurerm_key_vault_secret" "azure-db-host" {
   name         = "azure-db-host"
   key_vault_id = data.azurerm_key_vault.existing.id
 }
@@ -13,8 +13,8 @@ data "azurerm_key_vault_secret" "mysql-password" {
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
-data "azurerm_key_vault_secret" "mysql-user" {
-  name         = "mysql-user"
+data "azurerm_key_vault_secret" "azure-mysql-user" {
+  name         = "azure-mysql-user"
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
@@ -28,12 +28,7 @@ data "azurerm_key_vault_secret" "cloudflare_zone_id" {
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
-data "azurerm_key_vault_secret" "digitalocean_token" {
-  name         = "digitalocean-token"
-  key_vault_id = data.azurerm_key_vault.existing.id
-}
-
-data "azurerm_key_vault_secret" "private-ssh-key" {
-  name         = "private-vm-key"
+data "azurerm_key_vault_secret" "public-ssh-key" {
+  name         = "public-vm-key"
   key_vault_id = data.azurerm_key_vault.existing.id
 }

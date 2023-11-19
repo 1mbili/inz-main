@@ -33,7 +33,7 @@ resource "azurerm_network_security_group" "my_terraform_nsg" {
 
 
 resource "azurerm_network_interface_security_group_association" "base-security-group" {
-  count = 4
-  network_interface_id      = element([azurerm_network_interface.cdn_nic.id, azurerm_network_interface.monitoring_nic.id, azurerm_network_interface.lb_nic.id, azurerm_network_interface.web-0_nic.id])
+  count                     = 4
+  network_interface_id      = element([azurerm_network_interface.cdn_nic.id, azurerm_network_interface.monitoring_nic.id, azurerm_network_interface.lb_nic.id, azurerm_network_interface.web-0_nic.id], count.index)
   network_security_group_id = azurerm_network_security_group.my_terraform_nsg.id
 }

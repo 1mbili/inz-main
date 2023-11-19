@@ -6,7 +6,7 @@ monitoring
 [all:vars]
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ansible_port=22
-ansible_user='root'
+ansible_user='szef'
 ansible_ssh_private_key_file="~/.ssh/id_rsa"
 
 [web]

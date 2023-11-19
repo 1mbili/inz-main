@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.5.6"
+  required_version = ">= 1.0.6"
   required_providers {
     digitalocean = {
       source  = "digitalocean/digitalocean"
@@ -28,7 +28,7 @@ terraform {
 provider "azurerm" {
   features {
     resource_group {
-       prevent_deletion_if_contains_resources = false
-     }
+      prevent_deletion_if_contains_resources = false
+    }
   }
 }

@@ -21,12 +21,6 @@ resource "azurerm_network_interface" "cdn_nic" {
   }
 }
 
-# Connect the security group to the network interface
-resource "azurerm_network_interface_security_group_association" "cdn-security-group" {
-  network_interface_id      = azurerm_network_interface.cdn_nic.id
-  network_security_group_id = azurerm_network_security_group.my_terraform_nsg.id
-}
-
 
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "cdn" {
@@ -53,7 +47,7 @@ resource "azurerm_linux_virtual_machine" "cdn" {
   admin_username = "szef"
   admin_ssh_key {
     username   = "szef"
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = data.azurerm_key_vault_secret.public-ssh-key.value
   }
 
   boot_diagnostics {
