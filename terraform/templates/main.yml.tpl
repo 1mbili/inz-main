@@ -31,8 +31,8 @@
     prometheus_targets:
       node:
         - targets:
-            %{ for ip in web-vms ~}
-- "{{ hostvars['${ip.name}']['private_adress'] }}:9100"
+            %{ for ip in web-vms}
+            - "{{ hostvars['${ip.name}']['private_adress'] }}:9100"
 %{ endfor ~}
           labels:
             env: web
