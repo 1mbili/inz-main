@@ -32,7 +32,7 @@ resource "azurerm_linux_virtual_machine" "web-0" {
   os_disk {
     name                 = "myOsDiskweb-0"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {

@@ -33,7 +33,7 @@ resource "azurerm_linux_virtual_machine" "monitoring" {
   os_disk {
     name                 = "myOsDiskmonitoring"
     caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
