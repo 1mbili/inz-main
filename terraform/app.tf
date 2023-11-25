@@ -17,13 +17,6 @@ resource "digitalocean_droplet" "web" {
     timeout     = "2m"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "export PATH=$PATH:/usr/bin",
-      "sudo apt update",
-      "sudo apt install python3 -y"
-    ]
-  }
 }
 
 resource "digitalocean_droplet" "load_balancer" {

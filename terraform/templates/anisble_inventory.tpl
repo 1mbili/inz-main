@@ -21,10 +21,10 @@ ${ip.name} ansible_host=${ip.ipv4_address} private_adress=${ip.ipv4_address_priv
 
 [monitoring]
 %{ for ip in monitoring-vms ~}
-${ip.name} ansible_host=${ip.ipv4_address} private_adress=${ip.ipv4_address_private}3
+${ip.name} ansible_host=${ip.ipv4_address} private_adress=${ip.ipv4_address_private}
 %{ endfor ~}
 
 [cdn]
 %{ for ip in cdn-vms ~}
-${ip.name} ansible_host=${ip.ipv4_address} private_adress=${ip.ipv4_address_private}3
+${ip.name} ansible_host=${ip.ipv4_address} private_adress=${ip.ipv4_address_private}
 %{ endfor ~}

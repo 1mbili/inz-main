@@ -49,3 +49,10 @@
 %{ endfor ~}          
           labels:
             env: loadbalancer
+        - targets:
+            %{ for ip in cdn-vms ~}
+- "{{ hostvars['${ip.name}']['private_adress'] }}:9100"
+            - "{{ hostvars['${ip.name}']['ansible_host'] }}:9113"
+%{ endfor ~}          
+          labels:
+            env: cdn
