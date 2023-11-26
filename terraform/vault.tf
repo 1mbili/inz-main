@@ -1,21 +1,20 @@
-provider "azurerm" {
-  features {}
-}
-
 data "azurerm_key_vault" "existing" {
   name                = "vault0a"
   resource_group_name = "Inzynierka-app"
 }
 
-resource "azurerm_key_vault_secret" "mysql-host" {
-  name         = "mysql-host"
-  value        = digitalocean_database_cluster.mysqql-example.host
+data "azurerm_key_vault_secret" "azure-db-host" {
+  name         = "azure-db-host"
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
-resource "azurerm_key_vault_secret" "mysql-password" {
+data "azurerm_key_vault_secret" "mysql-password" {
   name         = "mysql-password"
-  value        = digitalocean_database_cluster.mysqql-example.password
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
+data "azurerm_key_vault_secret" "azure-mysql-user" {
+  name         = "azure-mysql-user"
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
@@ -29,12 +28,7 @@ data "azurerm_key_vault_secret" "cloudflare_zone_id" {
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
-data "azurerm_key_vault_secret" "digitalocean_token" {
-  name         = "digitalocean-token"
-  key_vault_id = data.azurerm_key_vault.existing.id
-}
-
-data "azurerm_key_vault_secret" "private-ssh-key" {
-  name         = "private-vm-key"
+data "azurerm_key_vault_secret" "public-ssh-key" {
+  name         = "public-vm-key"
   key_vault_id = data.azurerm_key_vault.existing.id
 }
