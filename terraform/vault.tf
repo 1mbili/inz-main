@@ -13,8 +13,31 @@ data "azurerm_key_vault_secret" "mysql-password" {
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
+resource "azurerm_key_vault_secret" "mysql-password-create" {
+  name         = "mysql-password"
+  value        = data.azurerm_key_vault_secret.mysql-password.value
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
+resource "azurerm_key_vault_secret" "mysql-host" {
+  name         = "mysql-host"
+  value        = "${data.azurerm_key_vault_secret.azure-db-host.value}.mysql.database.azure.com"
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
+resource "azurerm_key_vault_secret" "mysql-port" {
+  name         = "mysql-port"
+  value        = 3306
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
 data "azurerm_key_vault_secret" "azure-mysql-user" {
   name         = "azure-mysql-user"
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+resource "azurerm_key_vault_secret" "mysql-user" {
+  name         = "mysql-user"
+  value        =  "${data.azurerm_key_vault_secret.azure-mysql-user.value}@${data.azurerm_key_vault_secret.azure-db-host.value}"
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
