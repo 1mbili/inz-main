@@ -9,7 +9,7 @@ data "azurerm_key_vault_secret" "azure-db-host" {
 }
 
 data "azurerm_key_vault_secret" "mysql-password" {
-  name         = "mysql-password"
+  name         = "az-mysql-password"
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
