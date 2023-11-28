@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-ingress
+  namespace: argocd
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: notatnik.aplikacja-inzynierka.tech
+    http:
+      paths:
+      - path: /dupa
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-helm-server
+            port:
+              name: https
+  tls:
+  - hosts:
+    - notatnik.aplikacja-inzynierka.tech
+    secretName: test-tls 
