@@ -22,3 +22,21 @@ resource "helm_release" "argocd" {
   chart      = "argo-cd"
 
 }
+
+resource "helm_release" "ingress-nginx-operator" {
+  name      = "ingress-nginx-operator"
+  namespace = "ingress-nginx"
+  create_namespace = true
+
+  repository = "https://kubernetes.github.io/ingress-nginx"
+  chart      = "ingress-nginx"
+}
+
+resource "helm_release" "external-secrets" {
+  name      = "external-secrets"
+  namespace = "external-secrets"
+  create_namespace = true
+
+  repository = "https://charts.external-secrets.io"
+  chart      = "external-secrets"
+}

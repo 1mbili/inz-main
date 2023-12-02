@@ -32,7 +32,7 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
-
+k8s/tmp/*
 ansible/inventory.ini
 **inventory.ini
 **/inventory.ini
