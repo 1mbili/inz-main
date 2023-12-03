@@ -19,6 +19,18 @@ resource "azurerm_key_vault_secret" "mysql-password" {
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
+resource "azurerm_key_vault_secret" "mysql_port" {
+  name         = "mysql-port"
+  value        = digitalocean_database_cluster.mysqql-example.port
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
+resource "azurerm_key_vault_secret" "mysql-username" {
+  name         = "mysql-user"
+  value        = digitalocean_database_cluster.mysqql-example.user
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
 data "azurerm_key_vault_secret" "cloudflare_token" {
   name         = "cloudflaretoken"
   key_vault_id = data.azurerm_key_vault.existing.id
