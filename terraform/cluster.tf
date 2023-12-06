@@ -13,6 +13,6 @@ resource "digitalocean_kubernetes_cluster" "inz-kubernetes" {
 }
 
 resource "local_file" "kube_config" {
-    content  = digitalocean_kubernetes_cluster.inz-kubernetes.kube_config[0].raw_config
-    filename = "/home/bilu/.kube/config"
+  content  = digitalocean_kubernetes_cluster.inz-kubernetes.kube_config[0].raw_config
+  filename = "/home/bilu/.kube/config"
 }

@@ -45,8 +45,3 @@ data "azurerm_key_vault_secret" "digitalocean_token" {
   name         = "digitalocean-token"
   key_vault_id = data.azurerm_key_vault.existing.id
 }
-
-data "azurerm_key_vault_secret" "private-ssh-key" {
-  name         = "private-vm-key"
-  key_vault_id = data.azurerm_key_vault.existing.id
-}

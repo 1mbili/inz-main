@@ -25,10 +25,6 @@ terraform {
       source  = "hashicorp/local"
       version = "~> 2.0"
     }
-    time = {
-      source  = "hashicorp/time"
-      version = "~> 0.9"
-    }
   }
   backend "azurerm" {
     storage_account_name = "csb10032002f1976f3a"
@@ -39,8 +35,4 @@ terraform {
 
 provider "digitalocean" {
   token = data.azurerm_key_vault_secret.digitalocean_token.value
-}
-
-data "digitalocean_ssh_key" "terraform" {
-  name = "terraform"
 }
