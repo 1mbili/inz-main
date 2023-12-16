@@ -39,3 +39,11 @@ resource "cloudflare_record" "ingress_cdn" {
   type    = "A"
   proxied = true
 }
+
+resource "cloudflare_record" "ingress_monitoring" {
+  zone_id = data.azurerm_key_vault_secret.cloudflare_zone_id.value
+  name    = "monitoring"
+  value   = data.kubernetes_resource.ingress.object.status.loadBalancer.ingress[0].ip
+  type    = "A"
+  proxied = true
+}

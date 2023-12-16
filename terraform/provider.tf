@@ -25,6 +25,10 @@ terraform {
       source  = "hashicorp/local"
       version = "~> 2.0"
     }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = ">= 1.7.0"
+    }
   }
   backend "azurerm" {
     storage_account_name = "csb10032002f1976f3a"

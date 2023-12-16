@@ -78,3 +78,4 @@ resource "helm_release" "prometheus-operator" {
     value = false
   }
 }
+

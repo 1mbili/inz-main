@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: main-apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Server Project
+  destinations:
+    - namespace: inzynierka
+      server: https://kubernetes.default.svc
+  sourceRepos:
+    - git@github.com:1mbili/K8s-inzynierka-apps.git
+  clusterResourceWhitelist:
+  - group: ''
+    kind: '*'

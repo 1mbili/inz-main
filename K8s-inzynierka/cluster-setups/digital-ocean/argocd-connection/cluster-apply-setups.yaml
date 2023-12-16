@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: guestbook-apps
+  namespace: argocd
+spec: 
+  destination: 
+    namespace: argocd
+    server: "https://kubernetes.default.svc"
+  project: main-apps
+  source: 
+    path: test/kustomization.yaml
+    repoURL: git@github.com:1mbili/K8s-inzynierka-apps.git
+    targetRevision: main
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - Prune=true
+      

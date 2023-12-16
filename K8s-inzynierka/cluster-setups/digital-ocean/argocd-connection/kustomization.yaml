@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - secret-inz-repo.yaml
+  - argocd-inz-repo.yaml
+  - cluster-apply-setups.yaml
+  - cdn-app.yaml
+  - web-app.yaml
+  
