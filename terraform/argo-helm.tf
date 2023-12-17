@@ -50,6 +50,9 @@ resource "helm_release" "ingress-nginx-operator" {
     name  = "controller.metrics.serviceMonitor.additionalLabels.release"
     value = "prometheus"
   }
+  depends_on = [ 
+    helm_release.prometheus-operator
+   ]
 }
 
 resource "helm_release" "external-secrets" {
@@ -77,5 +80,6 @@ resource "helm_release" "prometheus-operator" {
     name  = "prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues"
     value = false
   }
+
 }
 
