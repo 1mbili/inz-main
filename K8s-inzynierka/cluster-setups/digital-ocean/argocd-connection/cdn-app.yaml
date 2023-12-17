@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: cdn-app
+  namespace: argocd
+spec: 
+  destination: 
+    namespace: inzynierka
+    server: "https://kubernetes.default.svc"
+  project: main-apps
+  source: 
+    path: cdn-app
+    repoURL: git@github.com:1mbili/K8s-inzynierka-apps.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true

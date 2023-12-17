@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.0.6"
+  required_version = ">= 1.5.6"
   required_providers {
     digitalocean = {
       source  = "digitalocean/digitalocean"
@@ -7,15 +7,27 @@ terraform {
     }
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=3.61.0"
+      version = "=3.79.0"
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
       version = "~> 4"
     }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.0"
+    }
     local = {
       source  = "hashicorp/local"
-      version = "~> 2.4"
+      version = "~> 2.0"
+    }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = ">= 1.7.0"
     }
   }
   backend "azurerm" {
@@ -25,10 +37,6 @@ terraform {
   }
 }
 
-provider "azurerm" {
-  features {
-    resource_group {
-      prevent_deletion_if_contains_resources = false
-    }
-  }
+provider "digitalocean" {
+  token = data.azurerm_key_vault_secret.digitalocean_token.value
 }
