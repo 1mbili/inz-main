@@ -39,30 +39,22 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
-
-      - name: Set up Python 3.
-        uses: actions/setup-python@v2
+          TF_VAR_ClientID: ${{ secrets.TF_VAR_ClientID }}
+          TF_VAR_ClientSecret: ${{ secrets.TF_VAR_ClientSecret }}
+          
+      - name: Kubectl tool installer        
+        uses: Azure/setup-kubectl@v3.2
         with:
-           python-version: '3.11'
-
-      - name: Install Ansible.
-        run: pip3 install ansible
-
-      - name: Set up SSH agent
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Install required roles.
-        run: ansible-galaxy install -r ../ansible/requirements.yml
-
-      - name: Install azure collection dependencies
-        run: pip3 install -r https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt
-
-      - name: Run Ansible Playbook
-        run: ansible-playbook -i ../ansible/inventory.ini ../ansible/main.yml
+          version: 'latest'
+      
+      - name: Kubectl apply
+        run: |
+          kubectl apply -f ../K8s-inzynierka/cluster-setups/digital-ocean/
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          KEY_VAULT_NAME: ${{ secrets.KEY_VAULT_NAME }}
+          ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
+          TF_VAR_ClientID: ${{ secrets.TF_VAR_ClientID }}
+          TF_VAR_ClientSecret: ${{ secrets.TF_VAR_ClientSecret }}
